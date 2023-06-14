@@ -1,41 +1,26 @@
-module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define(
-    "User",
-    {
-      Fullname: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      email: {
-        type: DataTypes.STRING,
-        unique: true,
-        validate: {
-          isEmail: true,
-        },
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      profileImage: DataTypes.STRING,
+const { sequelize } = require("./index");
+const Sequelize = require("sequelize");
+// Define a model for your table
+const User = sequelize.define("User", {
+  Fullname: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
     },
-    {
-      underscored: true,
-    }
-  );
+  },
+  email: {
+    type: Sequelize.STRING,
+    unique: true,
+    validate: {
+      isEmail: true,
+    },
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  profileImage: Sequelize.STRING,
+});
 
-  User.associate = (models) => {
-    User.hasMany(models.booking, {
-      foreignKey: {
-        name: "userId",
-        allowNull: false,
-      },
-      onDelete: "RESTRICT",
-    });
-  };
-
-  return User;
-};
+module.exports = { User };

@@ -1,13 +1,23 @@
-const userRepository = require("../repositories/user-repository");
+const User = require("../models/user");
 
-exports.checkEmail = async (email) => {
-  const exisUser = await userRepository.getUserByEmail(email);
-  return !!exisUser;
+const findEmail = async (email) => {
+  try {
+    const user = await User.findOne({
+      where: { email },
+    });
+
+    if (user) {
+      console.log("User found:", user);
+    } else {
+      console.log("User not found");
+    }
+  } catch (error) {
+    console.error("Error occurred while finding user:", error);
+  }
 };
 
-exports.createUser = (user) => userRepository.createUser(user);
-
-exports.getUserByEmail = async (email) => {
-  const user = await userRepository.getUserByEmail(email);
-  return user;
+const createUser = (user) => User.create(user);
+module.exports = {
+  findEmail,
+  createUser,
 };

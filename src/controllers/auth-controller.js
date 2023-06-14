@@ -12,7 +12,7 @@ exports.register = async (req, res, next) => {
   try {
     const value = validateRegister(req.body);
 
-    const isUserExist = await userService.checkEmail(value.email);
+    const isUserExist = await userService.findEmail(value.email);
     if (isUserExist) {
       createError("อีเมลถูกใช้แล้ว");
     }
