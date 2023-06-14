@@ -23,4 +23,4 @@ const User = sequelize.define("User", {
   profileImage: Sequelize.STRING,
 });
 
-module.exports = { User };
+module.exports =  User ;

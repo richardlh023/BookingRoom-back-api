@@ -17,6 +17,7 @@ const findEmail = async (email) => {
 };
 
 const createUser = (user) => User.create(user);
+
 module.exports = {
   findEmail,
   createUser,
