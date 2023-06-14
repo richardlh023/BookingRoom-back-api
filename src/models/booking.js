@@ -15,6 +15,13 @@ module.exports = (Sequelize, DataTpyes) => {
       },
       onDelete: "RESTRICT",
     });
+    booking.belongsTo(models.meeting, {
+      foreignKey: {
+        name: "meetingId",
+        allowNull: false,
+      },
+      onDelete: "RESTRICT",
+    });
   };
 
   return booking;

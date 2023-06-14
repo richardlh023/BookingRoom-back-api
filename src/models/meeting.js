@@ -2,8 +2,38 @@ module.exports = (Sequelize, DataTpyes) => {
   const meeting = Sequelize.define(
     "meeting",
     {
-      message: DataTpyes.STRING,
-      image: {
+      name: {
+        type: DataTpyes.STRING,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      details: {
+        type: DataTpyes.STRING,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      roomNumber: {
+        type: DataTpyes.STRING,
+        validate: {
+          notEmpty: true,
+        },
+      },
+
+      time: {
+        type: DataTpyes.STRING,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      dateStart: {
+        type: DataTpyes.STRING,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      dateEnd: {
         type: DataTpyes.STRING,
         validate: {
           notEmpty: true,
@@ -17,9 +47,16 @@ module.exports = (Sequelize, DataTpyes) => {
   );
 
   meeting.associate = (models) => {
-    meeting.belongsTo(models.User, {
+    meeting.hasMany(models.booking, {
       foreignKey: {
-        name: "userId",
+        name: "meetingId",
+        allowNull: false,
+      },
+      onDelete: "RESTRICT",
+    });
+    meeting.belongsTo(models.room, {
+      foreignKey: {
+        name: "roomId",
         allowNull: false,
       },
       onDelete: "RESTRICT",

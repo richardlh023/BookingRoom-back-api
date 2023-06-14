@@ -28,14 +28,6 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   User.associate = (models) => {
-    User.hasMany(models.meeting, {
-      foreignKey: {
-        name: "userId",
-        allowNull: false,
-      },
-      onDelete: "RESTRICT",
-    });
-
     User.hasMany(models.booking, {
       foreignKey: {
         name: "userId",
